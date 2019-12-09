@@ -43,7 +43,7 @@ def add_meta_data(file_name, metadata_dictionary):
 def add_network_nodes(edges, metadata_dictionary):
     e = open(edges, 'r')
 
-    G = nx.Graph()
+    G = nx.DiGraph()
     for line in e:
         # get one node from this line
         A = line.rstrip().split('\t')
