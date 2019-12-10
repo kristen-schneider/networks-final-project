@@ -81,15 +81,15 @@ def add_centrality_attribures(friendship_graph):
     nx.set_node_attributes(friendship_graph, hc, 'harmonic')
 
     #Eigenvector centrality
-    ec = nx.betweenness_centrality(friendship_graph)
+    ec = nx.eigenvector_centrality(friendship_graph)
     nx.set_node_attributes(friendship_graph, ec, 'eigen')
 
     #in-degree centrality
-    idc = nx.betweenness_centrality(friendship_graph)
+    idc = nx.in_degree_centrality(friendship_graph)
     nx.set_node_attributes(friendship_graph, idc, 'in')
 
     #out-degree centrality
-    odc = nx.betweenness_centrality(friendship_graph)
+    odc = nx.out_degree_centrality(friendship_graph)
     nx.set_node_attributes(friendship_graph, odc, 'out')
 
     return friendship_graph
