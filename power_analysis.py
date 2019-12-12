@@ -9,6 +9,10 @@ def main():
     FG = add_power_attribute(FG,PG)
     create_power_plot(FG)
     FG = add_centrality_attribures(FG)
+    eigen_diff = compare_power_rankings(FG, 'eigen')
+    harmonic_diff = compare_power_rankings(FG, 'harmonic')
+    in_diff = compare_power_rankings(FG, 'in')
+    out_diff = compare_power_rankings(FG, 'out')
 
 
 def create_graphs():
@@ -93,5 +97,38 @@ def add_centrality_attribures(friendship_graph):
     nx.set_node_attributes(friendship_graph, odc, 'out')
 
     return friendship_graph
+
+def compare_power_rankings(graph,attribute):
+    power_list = create_metadata_list(graph, 'power')
+    test_list = create_metadata_list(graph,attribute)
+    difference_list = find_ranking_differences(power_list,test_list)
+    return difference_list
+
+def find_ranking_differences(power_list,test_list):
+    difference_list = []
+    test_list_subset = []
+    power_list_subset = []
+
+    for i in range(len(power_list)):
+        power_list_subset.append(power_list[i][0])
+        test_list_subset.append(test_list[i][0])
+    for j in range(len(power_list)):
+        test_elem = test_list[j][0]
+        difference = test_list_subset.index(test_elem) - power_list_subset.index(test_elem)
+        difference_list.append([test_elem,difference])
+
+    return difference_list
+
+def create_metadata_list(graph,attribute):
+    data_list = []
+    for node in graph.nodes():
+        data = graph.nodes[node][attribute]
+        data_list.append([node,data])
+    data_list.sort(key = index_sort, reverse=True)
+        
+    return data_list
+
+def index_sort(data_list):
+    return data_list[1]
 
 main()
