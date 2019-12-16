@@ -1,3 +1,5 @@
+# NOTE: we had to remove some data files for privacy purposes.
+
 # networks-final-project
 
 There is a lot of redundant code here. I messed around with a few things before landing on my final idea that I moved forward with.
